@@ -4,6 +4,7 @@ Description=Setup Pixelfed
 [Service]
 WorkingDirectory=/home/pixelfed/pixelfed
 Type=oneshot
+User=pixelfed
 ExecStart=/home/pixelfed/setup.sh
 
 [Install]

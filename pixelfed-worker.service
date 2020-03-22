@@ -7,6 +7,7 @@ After=pixelfed-setup.service
 Restart=always
 WorkingDirectory=/home/pixelfed/pixelfed
 Type=simple
+User=pixelfed
 ExecStart=/home/pixelfed/worker.sh
 
 [Install]
