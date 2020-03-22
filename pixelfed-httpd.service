@@ -1,0 +1,13 @@
+[Unit]
+Description=Pixelfed worker
+Requires=pixelfed-setup.service
+After=pixelfed-setup.service
+
+[Service]
+Restart=always
+WorkingDirectory=/home/pixelfed/pixelfed
+Type=simple
+ExecStart=/home/pixelfed/httpd.sh
+
+[Install]
+WantedBy=default.target

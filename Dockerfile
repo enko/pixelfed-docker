@@ -1,10 +1,10 @@
-FROM php:7.4.4-apache
+FROM php:7.4.4-apache-buster
 
 ARG COMPOSER_VERSION="1.9.1"
 ARG COMPOSER_CHECKSUM="1f210b9037fcf82670d75892dfc44400f13fe9ada7af9e787f93e50e3b764111"
 
 RUN apt-get update \
- && apt-get install -y --no-install-recommends apt-utils \
+ && apt-get install -y --no-install-recommends apt-utils systemd \
  && apt-get install -y --no-install-recommends git gosu ffmpeg \
       optipng pngquant jpegoptim gifsicle libpq-dev libsqlite3-dev locales zip unzip libzip-dev libcurl4-openssl-dev \
       libfreetype6 libicu-dev libjpeg62-turbo libpng16-16 libxpm4 libwebp6 libmagickwand-6.q16-6 \
@@ -42,19 +42,27 @@ RUN useradd -m pixelfed
 COPY php.ini /usr/local/etc/php/conf.d/php.ini
 COPY apache-config /etc/apache2/sites-available/000-default.conf
 
+COPY pixelfed-setup.service /etc/systemd/system/pixelfed-setup.service
+COPY pixelfed-httpd.service /etc/systemd/system/pixelfed-httpd.service
+COPY pixelfed-worker.service /etc/systemd/system/pixelfed-worker.service
+
+RUN systemctl enable pixelfed-setup && \
+    systemctl enable pixelfed-httpd && \
+    systemctl enable pixelfed-worker
+
 USER pixelfed
 
-WORKDIR /home/pixelfed
-
-RUN git clone https://github.com/pixelfed/pixelfed && \
+RUN cd /home/pixelfed && \
+    git clone https://github.com/pixelfed/pixelfed && \
     cd pixelfed && \
     composer install && \
     mkdir /home/pixelfed/storage && \
     mkdir /home/pixelfed/bootstrap
 
-COPY ./start.sh /home/pixelfed/start.sh
-COPY ./worker.sh /home/pixelfed/worker.sh
+COPY httpd.sh /home/pixelfed/httpd.sh
+COPY setup.sh /home/pixelfed/setup.sh
+COPY worker.sh /home/pixelfed/worker.sh
 
-WORKDIR /home/pixelfed/pixelfed
+USER root
 
-ENTRYPOINT [ "/bin/bash", "/home/pixelfed/start.sh" ]
+ENTRYPOINT [ "/bin/systemd" ]

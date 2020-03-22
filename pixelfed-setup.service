@@ -1,0 +1,10 @@
+[Unit]
+Description=Setup Pixelfed
+
+[Service]
+WorkingDirectory=/home/pixelfed/pixelfed
+Type=oneshot
+ExecStart=/home/pixelfed/setup.sh
+
+[Install]
+WantedBy=default.target
