@@ -53,6 +53,7 @@ RUN git clone https://github.com/pixelfed/pixelfed && \
     mkdir /home/pixelfed/bootstrap
 
 COPY ./start.sh /home/pixelfed/start.sh
+COPY ./worker.sh /home/pixelfed/worker.sh
 
 WORKDIR /home/pixelfed/pixelfed
 
