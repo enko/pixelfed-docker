@@ -5,10 +5,9 @@ After=pixelfed-setup.service
 
 [Service]
 Restart=always
-WorkingDirectory=/home/pixelfed/pixelfed
 Type=simple
 User=pixelfed
-ExecStart=/home/pixelfed/httpd.sh
+ExecStart=/usr/local/bin/apache2-foreground
 
 [Install]
 WantedBy=default.target
