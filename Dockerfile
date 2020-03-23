@@ -48,7 +48,11 @@ COPY pixelfed-worker.service /etc/systemd/system/pixelfed-worker.service
 
 RUN systemctl enable pixelfed-setup && \
     systemctl enable pixelfed-httpd && \
-    systemctl enable pixelfed-worker
+    systemctl enable pixelfed-worker && \
+    rm /var/log/apache2/* && \
+    chown pixelfed /var/log/apache2 && \
+    chown pixelfed /var/run/apache2
+
 
 USER pixelfed
 
