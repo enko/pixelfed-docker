@@ -51,7 +51,7 @@ RUN systemctl enable pixelfed-setup && \
     systemctl enable pixelfed-worker && \
     rm /var/log/apache2/* && \
     chown pixelfed /var/log/apache2 && \
-    chown pixelfed /var/run/apache2
+    chown -R pixelfed /var/run/apache2
 
 
 USER pixelfed
