@@ -2,8 +2,8 @@
         ServerAdmin webmaster@localhost
         DocumentRoot /home/pixelfed/pixelfed/public
 
-        ErrorLog ${APACHE_LOG_DIR}/error.log
-        CustomLog ${APACHE_LOG_DIR}/access.log combined
+        ErrorLog /home/pixelfed/apache/logs/error.log
+        CustomLog /home/pixelfed/apache/logs/access.log combined
 
         <Directory /home/pixelfed/pixelfed/public>
             Options -Indexes

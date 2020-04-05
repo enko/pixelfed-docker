@@ -41,6 +41,7 @@ RUN useradd -m pixelfed
 
 COPY php.ini /usr/local/etc/php/conf.d/php.ini
 COPY apache-config /etc/apache2/sites-available/000-default.conf
+COPY apache2.conf /etc/apache2/apache2.conf
 
 COPY pixelfed-setup.service /etc/systemd/system/pixelfed-setup.service
 COPY pixelfed-httpd.service /etc/systemd/system/pixelfed-httpd.service
@@ -49,6 +50,7 @@ COPY pixelfed-worker.service /etc/systemd/system/pixelfed-worker.service
 RUN systemctl enable pixelfed-setup && \
     systemctl enable pixelfed-httpd && \
     systemctl enable pixelfed-worker && \
+    systemctl disable apache2 && \
     rm /var/log/apache2/* && \
     chown pixelfed /var/log/apache2 && \
     chown -R pixelfed /var/run/apache2
