@@ -1,0 +1,25 @@
+---
+version: '3'
+services:
+    app:
+        # Comment to use dockerhub image
+        image: 0xaffe/pixelfed:latest
+        restart: unless-stopped
+        ports:
+            - "127.0.0.1:8091:80"
+        depends_on:
+            - db
+            - redis
+        env_file:
+            - /srv/services/pics.tim.schumacher.im/env
+        volumes:
+            - "/srv/services/pics.tim.schumacher.im/data/storage:/home/pixelfed/pixelfed/storage"
+            - "/srv/services/pics.tim.schumacher.im/data/bootstrap:/home/pixelfed/bootstrap"
+            - "/srv/services/pics.tim.schumacher.im/env:/home/pixelfed/pixelfed/.env"
+            - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+        sysctls:
+            - net.ipv4.ip_unprivileged_port_start=0
+        tmpfs:
+            - /run:rw
+            - /run/lock:rw
+            - /tmp:rw
