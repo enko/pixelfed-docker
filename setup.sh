@@ -2,6 +2,10 @@
 
 echo "Setting up Pixelfed"
 
+mkdir -p /home/pixelfed/apache/logs
+mkdir -p /home/pixelfed/apache/locks
+mkdir -p /home/pixelfed/apache/runtime
+
 if [ ! -f "/home/pixelfed/storage/app/cities.json" ]; then
     echo "Initializing storage"
     cp -R /home/pixelfed/pixelfed/storage/* /home/pixelfed/storage

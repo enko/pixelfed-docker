@@ -4,6 +4,9 @@ Requires=pixelfed-setup.service
 After=pixelfed-setup.service
 
 [Service]
+Environment="APACHE_RUN_DIR=/home/pixelfed/apache/runtime"
+Environment="APACHE_LOG_DIR=/home/pixelfed/apache/logs"
+Environment="APACHE_LOCK_DIR=/home/pixelfed/apache/lock"
 Restart=always
 Type=simple
 User=pixelfed
