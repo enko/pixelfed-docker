@@ -6,6 +6,7 @@ WorkingDirectory=/home/pixelfed/pixelfed
 Type=oneshot
 User=pixelfed
 ExecStart=/home/pixelfed/setup.sh
+EnvironmentFile=/home/pixelfed/pixelfed/.env
 
 [Install]
 WantedBy=default.target

@@ -9,6 +9,7 @@ WorkingDirectory=/home/pixelfed/pixelfed
 Type=simple
 User=pixelfed
 ExecStart=/home/pixelfed/worker.sh
+EnvironmentFile=/home/pixelfed/pixelfed/.env
 
 [Install]
 WantedBy=default.target

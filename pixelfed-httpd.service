@@ -11,6 +11,7 @@ Restart=always
 Type=simple
 User=pixelfed
 ExecStart=/usr/local/bin/apache2-foreground
+EnvironmentFile=/home/pixelfed/pixelfed/.env
 
 [Install]
 WantedBy=default.target
