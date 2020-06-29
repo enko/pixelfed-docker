@@ -1,5 +1,5 @@
 [Unit]
-Description=Pixelfed worker
+Description=Pixelfed httpd
 Requires=pixelfed-setup.service
 After=pixelfed-setup.service
 
